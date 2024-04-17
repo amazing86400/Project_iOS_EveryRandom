@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    enum Flavor: String, CaseIterable, Identifiable {
+        case king, eat, you, pick
+        
+        var id: Self { self }
+    }
+    
     // MARK: 변수 초기화
     @State private var names: [String] = []
+    @State private var selectedFlavor = Flavor.king
     @State private var inputedName = ""
     @State private var showAlert = false
     @State private var showAlert2 = false
@@ -22,12 +29,23 @@ struct ContentView: View {
                 Image(systemName: "gamecontroller.fill")
                     .font(.title)
                     .bold()
-                    .foregroundStyle(.tint)
+                    .foregroundStyle(.gameLogo)
                     .padding(10)
                 Text("모두의 랜덤 게임")
                     .font(.title2)
                     .bold()
+                    .foregroundStyle(.title)
             }
+            .padding()
+            
+            // 게임 종목
+            Picker("Flavor", selection: $selectedFlavor) {
+                Text("오늘의 주인공").tag(Flavor.king)
+                Text("뭐먹지").tag(Flavor.eat)
+                Text("너로 정했다").tag(Flavor.you)
+                Text("걸려들었군").tag(Flavor.pick)
+            }
+            .pickerStyle(.menu)
             .padding()
             
             // 리스트
@@ -59,7 +77,7 @@ struct ContentView: View {
                 .padding(.bottom, 30)
             
             // 뽑기 버튼
-            Button("랜덤 뽑기!!") {
+            Button("랜덤 뽑기") {
                 if let randomValue = names.randomElement() {
                     result = randomValue
                     showAlert2 = true
@@ -73,7 +91,7 @@ struct ContentView: View {
             }
             .padding()
             .foregroundStyle(.white)
-            .background(.blue, in: RoundedRectangle(cornerRadius: 10))
+            .background(.pick, in: RoundedRectangle(cornerRadius: 10))
         }
         .padding()
     }
