@@ -75,6 +75,7 @@ struct ContentView: View {
                     )
                 }
                 .padding(.bottom, 30)
+                .autocorrectionDisabled()
             
             // 뽑기 버튼
             Button("랜덤 뽑기") {
