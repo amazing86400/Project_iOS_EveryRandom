@@ -20,7 +20,7 @@ struct ContentView: View {
     
     @State private var inputName = ""
     @State private var randomName = ""
-    @State private var animationCount = true
+    @State private var animationCount = 1
     
     @State private var showAlert = false
     @State private var showResultView = false
@@ -80,6 +80,7 @@ struct ContentView: View {
                         )
                     }
                     .padding(.bottom, 30)
+                    .textFieldStyle(.roundedBorder)
                     .autocorrectionDisabled()
                 
                 // 뽑기 버튼

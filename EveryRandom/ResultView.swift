@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ResultView: View {
     @Binding var showResultView: Bool
-    @Binding var animationCount: Bool
+    @Binding var animationCount: Int
     let winner: String
     
     var body: some View {
@@ -20,13 +20,13 @@ struct ResultView: View {
             HStack(alignment: .center, spacing: 10) {
                 Spacer()
                 Image(systemName: "heart.fill")
-                    .symbolEffect(.bounce.up.wholeSymbol, options: .repeat(10), value: animationCount)
+                    .symbolEffect(.bounce.up.wholeSymbol, options: .repeat(20), value: animationCount)
                     .foregroundStyle(.pink)
                 Text(winner)
                     .font(.title)
                     .bold()
                 Image(systemName: "heart.fill")
-                    .symbolEffect(.bounce.up.wholeSymbol, options: .repeat(10), value: animationCount)
+                    .symbolEffect(.bounce.up.wholeSymbol, options: .repeat(20), value: animationCount)
                     .foregroundStyle(.pink)
                 Spacer()
             }
@@ -48,9 +48,12 @@ struct ResultView: View {
         }
         .padding()
         .background(.white, in: RoundedRectangle(cornerRadius: 20))
+        .onAppear(perform: {
+            animationCount += 1
+        })
     }
 }
 
 #Preview {
-    ResultView(showResultView: .constant(true), animationCount: .constant(true), winner: "신기범")
+    ResultView(showResultView: .constant(true), animationCount: .constant(1), winner: "신기범")
 }
